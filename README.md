@@ -4,11 +4,14 @@ This is a meteor/ node based project
 - npm
 - meteor
 
+To install meteor :
+```
+curl https://install.meteor.com | /bin/sh;
+```
+
 # Install
 ```
-curl https://install.meteor.com | /bin/sh
-npm install; 
-meteor;
+npm install; meteor
 ```
 
 # Enjoy
