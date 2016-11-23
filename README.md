@@ -6,7 +6,9 @@ This is a meteor/ node based project
 
 # Install
 ```
-npm install; meteor;
+curl https://install.meteor.com | /bin/sh
+npm install; 
+meteor;
 ```
 
 # Enjoy
