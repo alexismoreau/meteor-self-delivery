@@ -33,7 +33,7 @@
       "import/no-unassigned-import": [
         0, { "ignore": ["./main.html"] }
       ],
-      "func-names": ["error", "as-needed"],
+      "func-names": ["error", "never"],
       "object-curly-spacing": ["error", "always"]
     },
     "new-cap": [
