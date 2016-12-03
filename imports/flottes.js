@@ -33,7 +33,7 @@ Meteor.methods({
   SupprimerCamion(id) {
     //  if (!this.userId) {
     //  throw new Meteor.Error('unauthorized');
-    //}
+    //  }
 
     if (!id) {
       throw new Meteor.Error('invalid id');

@@ -2,12 +2,13 @@
  * Created by alexis_moreau on 28/11/2016.
  */
 import { Meteor } from 'meteor/meteor';
-import { Template } from 'meteor/templating';
 import Flottes from '../imports/flottes';
 
 const distance = require('google-distance');
 
-const camionList = Flottes.find().fetch()[i]; // ajouter id
+const id = 0; // ajouter id user par la suite
+
+const camionList = Flottes.find().fetch()[id];
 
 Meteor.methods({
   getLocation() {
@@ -29,9 +30,9 @@ Meteor.methods({
         camionList.dispo = false;
         console.log(data);
         camionList.localisation = arr;
-        console.log('flotte située à ' + localisation +
+        console.log('flotte située à ' + camionList.localisation +
           ' depuis ' + dep);
-        Meteor.call('demandeTrajet', localisation, arrivee);
+        Meteor.call('demandeTrajet', camionList.localisation, arrivee);
         camionList.dispo = true; // flotte disponible seulement à la fin
                                  // du trajet
       }));
@@ -42,7 +43,7 @@ Meteor.methods({
         console.log('Flotte située à ' + camionList.localisation +
           '. Envoi à ' + depart);
         Meteor.call('callDistanceAPI', camionList.localisation, depart);
-      } else if (arrivee === localisation) {
+      } else if (arrivee === Meteor.call('getLocation')) {
         console.log('flotte arrivée à bon port à ' + camionList.localisation);
         camionList.dispo = true;
       } else {
