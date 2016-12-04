@@ -1,37 +1,35 @@
 /**
  * Created by alexis_moreau on 30/11/2016.
  */
-import { Random } from 'meteor/random';
 import { Mongo } from 'meteor/mongo';
 import { Meteor } from 'meteor/meteor';
 
 const Flottes = new Mongo.Collection('flottes');
 
-// let camionList = [];
-
-const camion = {
-  id: Random.id()
-};
+let currentId = 1; // debut du compte des id camions
 
 Meteor.methods({
+  AfficherListeCamions() {
+    console.log(Flottes.find().fetch());
+  },
   InsererCamion(camion) {
     //  if(!this.userId) {                    ATTENTE AUTHENTIFICATION
     //    console.log('ici');
     //    throw new Meteor.Error('unauthorized');
     //  }
-    const camionList = Flottes.find().fetch().push(camion);
+
+    const listeCamions = Flottes.find().fetch().push(camion);
 
     Flottes.insert({
-      camions: camionList,
-      localisation: 'Paris, FR',
+      id: listeCamions,
+      localisation: 'Paris, FR', // Paris par default
       dispo: true, // dispo par defaut
-      createdBy: this.userId,
-      createdAt: Date.now()
+      createdBy: this.userId, // proprietaire
+      createdAt: Date.now() // date de creation
     });
   },
-
   SupprimerCamion(id) {
-    //  if (!this.userId) {
+    //  if (!this.userId) {                    ATTENTE AUTHENTIFICATION
     //  throw new Meteor.Error('unauthorized');
     //  }
 
@@ -39,28 +37,53 @@ Meteor.methods({
       throw new Meteor.Error('invalid id');
     }
 
-    Flottes.remove({
-      // _id: id,
-      camions: id,
-      createdBy: this.userId
-    });
+    Flottes.remove({ id });
+  },
+  ActiverCamion(id) {
+    //  if (!this.userId) {                    ATTENTE AUTHENTIFICATION
+    //  throw new Meteor.Error('unauthorized');
+    //  }
+
+    if (!id) {
+      throw new Meteor.Error('invalid id');
+    }
+
+    Flottes.update({ id }, { $set: { dispo: true } });
+  },
+  DesactiverCamion(id) {
+    //  if (!this.userId) {                    ATTENTE AUTHENTIFICATION
+    //  throw new Meteor.Error('unauthorized');
+    //  }
+
+    if (!id) {
+      throw new Meteor.Error('invalid id');
+    }
+
+    Flottes.update({ id }, { $set: { dispo: false } });
   }
 });
 
 export default Flottes;
 
-/*
-for (i in Flottes.find().fetch()) {
-  console.log(Flottes.find().fetch()[i].camions);
-}
-*/
+const cametar = Object.create({}, { // creation camion avec id partant de 1
+  id: { value: currentId++ }
+});
 
-const cametar = Object.create(camion);
+console.log('avant insertion');
+Meteor.call('AfficherListeCamions');
 
-// Meteor.call('InsererCamion', cametar); // inserer un camion dans la flotte
+Meteor.call('InsererCamion', cametar); // inserer un camion dans la flotte
+console.log('apres insertion');
+Meteor.call('AfficherListeCamions');
 
-const camionList = Flottes.find().fetch(); // liste des camions dans la flotte
+Meteor.call('DesactiverCamion', 1); // desactiver un camion precis
+console.log('apres desactivation');
+Meteor.call('AfficherListeCamions');
 
-// Meteor.call('SupprimerCamion', 4); // supprimer un camion precis
+Meteor.call('ActiverCamion', 1); // activer un camion precis
+console.log('apres activation');
+Meteor.call('AfficherListeCamions');
 
-console.log(camionList);
+Meteor.call('SupprimerCamion', 1); // supprimer un camion precis
+console.log('apres suppression');
+Meteor.call('AfficherListeCamions');
