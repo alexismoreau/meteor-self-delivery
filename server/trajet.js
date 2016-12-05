@@ -6,18 +6,8 @@ import Flottes from '../imports/flottes';
 
 const distance = require('google-distance');
 
-const id = 0; // ajouter id user par la suite
-
-const camionList = Flottes.find().fetch()[id];
-
 Meteor.methods({
-  getLocation() {
-    return camionList.localisation;
-  },
-  isDisponible() {
-    return camionList.dispo;
-  },
-  callDistanceAPI(dep, arr) {
+  callDistanceAPI(camion, dep, arr) {
     distance.get(
       {
         origin: dep,
@@ -27,25 +17,27 @@ Meteor.methods({
         if (err) {
           return console.log(err);
         }
-        camionList.dispo = false;
+        Flottes.update({_id : this.userId},{$set:{dispo: false}});
         console.log(data);
-        camionList.localisation = arr;
-        console.log('flotte située à ' + camionList.localisation +
+        Flottes.update({_id : this.userId},{$set:{localisation: arr}});
+        console.log('flotte située à ' + Meteor.call('getLocation') +
           ' depuis ' + dep);
-        Meteor.call('demandeTrajet', camionList.localisation, arrivee);
-        camionList.dispo = true; // flotte disponible seulement à la fin
-                                 // du trajet
-      }));
+        Meteor.call('demandeTrajet', Meteor.call('getLocation'), arrivee);
+        Flottes.update({_id : this.userId},{$set:{dispo: true}});
+        // flotte disponible seulement à la fin du trajet
+      })
+    );
   },
   demandeTrajet(depart, arrivee) {
     if (Meteor.call('isDisponible')) {
       if (depart !== Meteor.call('getLocation')) {
-        console.log('Flotte située à ' + camionList.localisation +
+        console.log('Flotte située à ' + Meteor.call('getLocation') +
           '. Envoi à ' + depart);
-        Meteor.call('callDistanceAPI', camionList.localisation, depart);
+        Meteor.call('callDistanceAPI', Meteor.call('getLocation'), depart);
       } else if (arrivee === Meteor.call('getLocation')) {
-        console.log('flotte arrivée à bon port à ' + camionList.localisation);
-        camionList.dispo = true;
+        console.log('flotte arrivée à bon port à '
+          + Meteor.call('getLocation'));
+        Meteor.call('FinTrajet');
       } else {
         Meteor.call('callDistanceAPI', depart, arrivee);
       }
@@ -61,4 +53,4 @@ Meteor.methods({
 
 let depart = 'Strasbourg, FR';
 let arrivee = 'Marseille, FR';
-Meteor.call('demandeTrajet', depart, arrivee);
+// Meteor.call('demandeTrajet', depart, arrivee);

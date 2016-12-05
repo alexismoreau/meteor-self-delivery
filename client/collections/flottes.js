@@ -3,7 +3,7 @@
  */
 import { Meteor } from 'meteor/meteor';
 
-import Flottes from '../imports/flottes';
+import Flottes from '../../imports/flottes';
 
 Meteor.subscribe('flottes', function() {
   const camionList = Flottes.find().fetch();

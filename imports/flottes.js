@@ -6,11 +6,35 @@ import { Meteor } from 'meteor/meteor';
 
 const Flottes = new Mongo.Collection('flottes');
 
-let currentId = 1; // debut du compte des id camions
-
 Meteor.methods({
   AfficherListeCamions() {
     console.log(Flottes.find().fetch());
+  },
+  LocalisationCamion(id) {
+    //  if (!this.userId) {                    ATTENTE AUTHENTIFICATION
+    //  throw new Meteor.Error('unauthorized');
+    //  }
+
+    if (!id) {
+      throw new Meteor.Error('invalid id');
+    }
+
+    console.log(Flottes.findOne({ id }).localisation);
+  },
+
+  DisponibiliteCamion(id) {
+    //  if (!this.userId) {                    ATTENTE AUTHENTIFICATION
+    //  throw new Meteor.Error('unauthorized');
+    //  }
+
+    if (!id) {
+      throw new Meteor.Error('invalid id');
+    }
+
+    console.log(Flottes.findOne({ id }).dispo);
+  },
+  FinTrajet(id) {
+    Meteor.call('DesactiverCamion', id);
   },
   InsererCamion(camion) {
     //  if(!this.userId) {                    ATTENTE AUTHENTIFICATION
@@ -64,26 +88,3 @@ Meteor.methods({
 });
 
 export default Flottes;
-
-const cametar = Object.create({}, { // creation camion avec id partant de 1
-  id: { value: currentId++ }
-});
-
-console.log('avant insertion');
-Meteor.call('AfficherListeCamions');
-
-Meteor.call('InsererCamion', cametar); // inserer un camion dans la flotte
-console.log('apres insertion');
-Meteor.call('AfficherListeCamions');
-
-Meteor.call('DesactiverCamion', 1); // desactiver un camion precis
-console.log('apres desactivation');
-Meteor.call('AfficherListeCamions');
-
-Meteor.call('ActiverCamion', 1); // activer un camion precis
-console.log('apres activation');
-Meteor.call('AfficherListeCamions');
-
-Meteor.call('SupprimerCamion', 1); // supprimer un camion precis
-console.log('apres suppression');
-Meteor.call('AfficherListeCamions');
