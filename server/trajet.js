@@ -7,7 +7,7 @@ import Flottes from '../imports/flottes';
 const distance = require('google-distance');
 
 Meteor.methods({
-  callDistanceAPI(camion, dep, arr) {
+  trajet(id, dep, arr) {
     distance.get(
       {
         origin: dep,
@@ -17,29 +17,41 @@ Meteor.methods({
         if (err) {
           return console.log(err);
         }
-        Flottes.update({_id : this.userId},{$set:{dispo: false}});
         console.log(data);
-        Flottes.update({_id : this.userId},{$set:{localisation: arr}});
-        console.log('flotte située à ' + Meteor.call('getLocation') +
-          ' depuis ' + dep);
-        Meteor.call('demandeTrajet', Meteor.call('getLocation'), arrivee);
-        Flottes.update({_id : this.userId},{$set:{dispo: true}});
-        // flotte disponible seulement à la fin du trajet
       })
     );
+    Meteor.call('changerLocalisationCamion', id, arr);
   },
-  demandeTrajet(depart, arrivee) {
-    if (Meteor.call('isDisponible')) {
-      if (depart !== Meteor.call('getLocation')) {
-        console.log('Flotte située à ' + Meteor.call('getLocation') +
+  demandeTrajet(id, depart, arrivee) {
+    const localisation = Meteor.call('localisationCamion', id);
+    if (Meteor.call('disponibiliteCamion', id)) {
+      if (depart !== localisation) {
+        Meteor.call('desactiverCamion', id);
+
+        console.log('Flotte située à ' + localisation +
           '. Envoi à ' + depart);
-        Meteor.call('callDistanceAPI', Meteor.call('getLocation'), depart);
-      } else if (arrivee === Meteor.call('getLocation')) {
-        console.log('flotte arrivée à bon port à '
-          + Meteor.call('getLocation'));
-        Meteor.call('FinTrajet');
-      } else {
-        Meteor.call('callDistanceAPI', depart, arrivee);
+
+        Meteor.call('trajet', id, localisation, depart);
+
+        console.log('Flotte située à ' + Meteor.call('localisationCamion', id) +
+          '. Envoi à ' + arrivee);
+
+        Meteor.call('trajet', id, Meteor.call('localisationCamion', id), arrivee);
+
+        console.log('flotte arrivée à bon port à '+ Meteor.call('localisationCamion', id));
+
+        Meteor.call('activerCamion', id);
+      } else if (depart === localisation) {
+        Meteor.call('desactiverCamion', id);
+
+        console.log('Flotte située à ' + localisation +
+          '. Envoi à ' + arrivee);
+
+        Meteor.call('trajet', id, localisation, arrivee);
+
+        console.log('flotte arrivée à '+ Meteor.call('localisationCamion', id));
+
+        Meteor.call('activerCamion', id);
       }
     } else {
       console.log('flotte non disponible');
@@ -51,6 +63,8 @@ Meteor.methods({
  Flotte située à Paris mais trajet de Strasbourg à Marseille
  */
 
-let depart = 'Strasbourg, FR';
-let arrivee = 'Marseille, FR';
-// Meteor.call('demandeTrajet', depart, arrivee);
+Meteor.call('afficherListeCamions');
+
+Meteor.call('demandeTrajet', 1, 'Paris, FR', 'Marseille, FR');
+
+Meteor.call('afficherListeCamions');
