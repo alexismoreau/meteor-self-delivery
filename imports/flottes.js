@@ -7,10 +7,10 @@ import { Meteor } from 'meteor/meteor';
 const Flottes = new Mongo.Collection('flottes');
 
 Meteor.methods({
-  AfficherListeCamions() {
+  afficherListeCamions() {
     console.log(Flottes.find().fetch());
   },
-  LocalisationCamion(id) {
+  localisationCamion(id) {
     //  if (!this.userId) {                    ATTENTE AUTHENTIFICATION
     //  throw new Meteor.Error('unauthorized');
     //  }
@@ -19,10 +19,10 @@ Meteor.methods({
       throw new Meteor.Error('invalid id');
     }
 
-    console.log(Flottes.findOne({ id }).localisation);
+    return Flottes.findOne({ id }).localisation;
   },
 
-  DisponibiliteCamion(id) {
+  disponibiliteCamion(id) {
     //  if (!this.userId) {                    ATTENTE AUTHENTIFICATION
     //  throw new Meteor.Error('unauthorized');
     //  }
@@ -31,12 +31,9 @@ Meteor.methods({
       throw new Meteor.Error('invalid id');
     }
 
-    console.log(Flottes.findOne({ id }).dispo);
+    return Flottes.findOne({ id }).dispo;
   },
-  FinTrajet(id) {
-    Meteor.call('DesactiverCamion', id);
-  },
-  InsererCamion(camion) {
+  insererCamion(camion) {
     //  if(!this.userId) {                    ATTENTE AUTHENTIFICATION
     //    console.log('ici');
     //    throw new Meteor.Error('unauthorized');
@@ -52,7 +49,7 @@ Meteor.methods({
       createdAt: Date.now() // date de creation
     });
   },
-  SupprimerCamion(id) {
+  supprimerCamion(id) {
     //  if (!this.userId) {                    ATTENTE AUTHENTIFICATION
     //  throw new Meteor.Error('unauthorized');
     //  }
@@ -63,7 +60,7 @@ Meteor.methods({
 
     Flottes.remove({ id });
   },
-  ActiverCamion(id) {
+  activerCamion(id) {
     //  if (!this.userId) {                    ATTENTE AUTHENTIFICATION
     //  throw new Meteor.Error('unauthorized');
     //  }
@@ -74,7 +71,7 @@ Meteor.methods({
 
     Flottes.update({ id }, { $set: { dispo: true } });
   },
-  DesactiverCamion(id) {
+  desactiverCamion(id) {
     //  if (!this.userId) {                    ATTENTE AUTHENTIFICATION
     //  throw new Meteor.Error('unauthorized');
     //  }
@@ -84,6 +81,9 @@ Meteor.methods({
     }
 
     Flottes.update({ id }, { $set: { dispo: false } });
+  },
+  changerLocalisationCamion(id, nouvelleLocalisation) {
+    Flottes.update({ id }, { $set: { localisation: nouvelleLocalisation } });
   }
 });
 
