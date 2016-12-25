@@ -36,9 +36,11 @@ Meteor.methods({
         console.log('Flotte située à ' + Meteor.call('localisationCamion', id) +
           '. Envoi à ' + arrivee);
 
-        Meteor.call('trajet', id, Meteor.call('localisationCamion', id), arrivee);
+        Meteor.call('trajet', id, Meteor.call('localisationCamion', id)
+          , arrivee);
 
-        console.log('flotte arrivée à bon port à '+ Meteor.call('localisationCamion', id));
+        console.log('flotte arrivée à bon port à ' +
+          ''+ Meteor.call('localisationCamion', id));
 
         Meteor.call('activerCamion', id);
       } else if (depart === localisation) {
@@ -63,8 +65,5 @@ Meteor.methods({
  Flotte située à Paris mais trajet de Strasbourg à Marseille
  */
 
-Meteor.call('afficherListeCamions');
+// Meteor.call('demandeTrajet', 1, 'Paris, FR', 'Marseille, FR');
 
-Meteor.call('demandeTrajet', 1, 'Paris, FR', 'Marseille, FR');
-
-Meteor.call('afficherListeCamions');

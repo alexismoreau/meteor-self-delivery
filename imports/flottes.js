@@ -8,7 +8,7 @@ const Flottes = new Mongo.Collection('flottes');
 
 Meteor.methods({
   afficherListeCamions() {
-    console.log(Flottes.find().fetch());
+    return Flottes.find().fetch();
   },
   localisationCamion(id) {
     //  if (!this.userId) {                    ATTENTE AUTHENTIFICATION
@@ -21,7 +21,6 @@ Meteor.methods({
 
     return Flottes.findOne({ id }).localisation;
   },
-
   disponibiliteCamion(id) {
     //  if (!this.userId) {                    ATTENTE AUTHENTIFICATION
     //  throw new Meteor.Error('unauthorized');
