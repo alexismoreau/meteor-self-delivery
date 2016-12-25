@@ -14,6 +14,11 @@ curl https://install.meteor.com | /bin/sh;
 npm install; meteor
 ```
 
+# Run Unit Tests
+```
+meteor test --driver-package=practicalmeteor:mocha
+```
+
 # Enjoy
 browse to http://localhost:3000
 
