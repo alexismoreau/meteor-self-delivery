@@ -3,6 +3,7 @@ import { Meteor } from 'meteor/meteor';
 Meteor.startup(() => {
   // code to run on server at startup
 });
+/*
 
 let currentId = 1; // debut du compte des id camions
 
@@ -20,20 +21,17 @@ console.log(Meteor.call('afficherListeCamions'));
 
 Meteor.call('desactiverCamion', 1); // desactiver un camion precis
 console.log('apres desactivation');
-console.log(Meteor.call('afficherListeCamions'));
+console.log(Meteor.call('disponibiliteCamion', 1));
 
-console.log(Meteor.call('activerCamion', 1)); // activer un camion precis
+Meteor.call('activerCamion', 1); // activer un camion precis
 console.log('apres activation');
-console.log(Meteor.call('afficherListeCamions'));
+console.log(Meteor.call('disponibiliteCamion', 1));
 
 console.log('affiche localisation camion');
-Meteor.call('localisationCamion', 1);
-console.log(Meteor.call('afficherListeCamions'));
-
-console.log('affiche disponibilite camion');
-Meteor.call('disponibiliteCamion', 1);
-console.log(Meteor.call('afficherListeCamions'));
+console.log(Meteor.call('localisationCamion', 1));
 
 Meteor.call('supprimerCamion', 1); // supprimer un camion precis
 console.log('apres suppression');
+
 console.log(Meteor.call('afficherListeCamions'));
+*/
