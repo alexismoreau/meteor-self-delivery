@@ -4,6 +4,6 @@
 import { Meteor } from 'meteor/meteor';
 import Flottes from '../../imports/flottes';
 
-Meteor.publish('flottes', function() {
+Meteor.publish('flottes', () => {
   return Flottes.find();
 });

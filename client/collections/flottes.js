@@ -3,6 +3,4 @@
  */
 import { Meteor } from 'meteor/meteor';
 
-import Flottes from '../../imports/flottes';
-
 Meteor.subscribe('flottes');

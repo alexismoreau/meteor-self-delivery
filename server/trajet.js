@@ -2,9 +2,8 @@
  * Created by alexis_moreau on 28/11/2016.
  */
 import { Meteor } from 'meteor/meteor';
-import Flottes from '../imports/flottes';
-
 import { resetDatabase } from 'meteor/xolvio:cleaner';
+
 resetDatabase(); // just for dev
 
 const distance = require('google-distance');
@@ -33,8 +32,8 @@ Meteor.methods({
 
     const delai = Meteor.call('calculDureeTrajet', depart, arrivee);
 
-    console.log('De ' + depart + ' à ' + arrivee + ' il y a ' + delai
-      + ' secondes de trajet');
+    console.log('De ' + depart + ' à ' + arrivee + ' il y a ' + delai +
+      ' secondes de trajet');
 
     Meteor.call('changerLocalisationCamion', id, arrivee);
 
@@ -43,7 +42,7 @@ Meteor.methods({
     console.log('Flotte ' + id + ' arrivée à ' + depart);
   },
   demandeTrajet(id, depart, arrivee) {
-    let localisation = Meteor.call('localisationCamion', id);
+    const localisation = Meteor.call('localisationCamion', id);
     if (Meteor.call('disponibiliteCamion', id)) {
       if (depart !== localisation) {
         Meteor.call('desactiverCamion', id);
@@ -53,7 +52,6 @@ Meteor.methods({
         Meteor.call('trajet', id, depart, arrivee);
 
         Meteor.call('activerCamion', id);
-
       } else if (depart === localisation) {
         Meteor.call('desactiverCamion', id);
 
@@ -74,7 +72,7 @@ Meteor.methods({
 let currentId = 1; // debut du compte des id camions
 
 const cametar = Object.create({}, { // creation camion avec id partant de 1
-  id: {value: currentId++}
+  id: { value: currentId++ }
 });
 
 Meteor.call('insererCamion', cametar); // inserer un camion dans la flotte
