@@ -1,8 +1,8 @@
 // meteor test --driver-package=practicalmeteor:mocha
-import { Meteor } from 'meteor/meteor';
-import { resetDatabase } from 'meteor/xolvio:cleaner';
-import { describe, it } from 'meteor/practicalmeteor:mocha';
-import { expect } from 'meteor/practicalmeteor:chai';
+import {Meteor} from 'meteor/meteor';
+import {resetDatabase} from 'meteor/xolvio:cleaner';
+import {describe, it} from 'meteor/practicalmeteor:mocha';
+import {expect} from 'meteor/practicalmeteor:chai';
 import Flottes from '../imports/flottes';
 
 if (Meteor.isServer) {
@@ -12,7 +12,7 @@ if (Meteor.isServer) {
       'être nulle', done => {
       let currentId = 1;
       const cametar = Object.create({}, {
-        id: { value: currentId++ }
+        id: {value: currentId++}
       });
       Meteor.call('insererCamion', cametar);
       expect(Flottes.find().fetch().length).to.not.equal(0);

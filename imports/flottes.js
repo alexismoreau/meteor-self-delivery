@@ -1,8 +1,8 @@
 /**
  * Created by alexis_moreau on 30/11/2016.
  */
-import { Mongo } from 'meteor/mongo';
-import { Meteor } from 'meteor/meteor';
+import {Mongo} from 'meteor/mongo';
+import {Meteor} from 'meteor/meteor';
 
 const Flottes = new Mongo.Collection('flottes');
 
@@ -19,7 +19,7 @@ Meteor.methods({
       throw new Meteor.Error('invalid id');
     }
 
-    return Flottes.findOne({ id }).localisation;
+    return Flottes.findOne({id}).localisation;
   },
   disponibiliteCamion(id) {
     //  if (!this.userId) {                    ATTENTE AUTHENTIFICATION
@@ -30,7 +30,7 @@ Meteor.methods({
       throw new Meteor.Error('invalid id');
     }
 
-    return Flottes.findOne({ id }).dispo;
+    return Flottes.findOne({id}).dispo;
   },
   insererCamion(camion) {
     //  if(!this.userId) {                    ATTENTE AUTHENTIFICATION
@@ -57,7 +57,7 @@ Meteor.methods({
       throw new Meteor.Error('invalid id');
     }
 
-    Flottes.remove({ id });
+    Flottes.remove({id});
   },
   activerCamion(id) {
     //  if (!this.userId) {                    ATTENTE AUTHENTIFICATION
@@ -68,7 +68,7 @@ Meteor.methods({
       throw new Meteor.Error('invalid id');
     }
 
-    Flottes.update({ id }, { $set: { dispo: true } });
+    Flottes.update({id}, {$set: {dispo: true}});
   },
   desactiverCamion(id) {
     //  if (!this.userId) {                    ATTENTE AUTHENTIFICATION
@@ -79,10 +79,10 @@ Meteor.methods({
       throw new Meteor.Error('invalid id');
     }
 
-    Flottes.update({ id }, { $set: { dispo: false } });
+    Flottes.update({id}, {$set: {dispo: false}});
   },
   changerLocalisationCamion(id, nouvelleLocalisation) {
-    Flottes.update({ id }, { $set: { localisation: nouvelleLocalisation } });
+    Flottes.update({id}, {$set: {localisation: nouvelleLocalisation}});
   }
 });
 

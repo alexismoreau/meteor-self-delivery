@@ -1,8 +1,8 @@
 /**
  * Created by alexis_moreau on 28/11/2016.
  */
-import { Meteor } from 'meteor/meteor';
-import { resetDatabase } from 'meteor/xolvio:cleaner';
+import {Meteor} from 'meteor/meteor';
+import {resetDatabase} from 'meteor/xolvio:cleaner';
 
 resetDatabase(); // just for dev
 
@@ -72,7 +72,7 @@ Meteor.methods({
 let currentId = 1; // debut du compte des id camions
 
 const cametar = Object.create({}, { // creation camion avec id partant de 1
-  id: { value: currentId++ }
+  id: {value: currentId++}
 });
 
 Meteor.call('insererCamion', cametar); // inserer un camion dans la flotte
