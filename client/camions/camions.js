@@ -14,6 +14,7 @@ Template.dashboard.helpers({
   }
 });
 
+
 Template.dashboard.events({
   'click #create'() {
     Meteor.call('insererCamion');
@@ -24,7 +25,7 @@ Template.camion.events({
   'click #select'() {
     // click on a truck to select it
     Session.set('selectedFlotte', this._id);
-    console.log(Session.get('selectedFlotte'));
+    Session.get('selectedFlotte');
   },
   'click #enable'() {
     Meteor.call('activerCamion', this._id);
