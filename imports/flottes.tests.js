@@ -11,11 +11,11 @@ if (Meteor.isServer) {
   describe('Fonctions relatives au Camions (modele)', () => {
     resetDatabase();
 
-    var invocation = new DDPCommon.MethodInvocation({
+    const invocation = new DDPCommon.MethodInvocation({
       isSimulation: false,
-      userId: "dbAnEgsK22x5NAghP",
-      setUserId: ()=>{},
-      unblock: ()=>{},
+      userId: 'dbAnEgsK22x5NAghP',
+      setUserId: () => {},
+      unblock: () => {},
       connection: {},
       randomSeed: Math.random()
     });
@@ -29,27 +29,33 @@ if (Meteor.isServer) {
       done();
     });
     it('localisationCamion: doit retourner une string', done => {
-      expect(Meteor.call('localisationCamion', Flottes.find().fetch()[0]._id)).to.be.a('string');
+      expect(Meteor.call('localisationCamion', Flottes.find().fetch()[0]._id))
+        .to.be.a('string');
       done();
     });
     it('disponibiliteCamion: doit retourner un booleen', done => {
-      expect(Meteor.call('disponibiliteCamion', Flottes.find().fetch()[0]._id)).to.be.a('boolean');
+      expect(Meteor.call('disponibiliteCamion', Flottes.find().fetch()[0]._id))
+        .to.be.a('boolean');
       done();
     });
     it('activerCamion: dispo retourne true', done => {
       Meteor.call('activerCamion', Flottes.find().fetch()[0]._id);
-      expect(Meteor.call('disponibiliteCamion', Flottes.find().fetch()[0]._id)).to.equal(true);
+      expect(Meteor.call('disponibiliteCamion', Flottes.find().fetch()[0]._id))
+        .to.equal(true);
       done();
     });
     it('desactiverCamion: dispo retourne false', done => {
       Meteor.call('desactiverCamion', Flottes.find().fetch()[0]._id);
-      expect(Meteor.call('disponibiliteCamion', Flottes.find().fetch()[0]._id)).to.equal(false);
+      expect(Meteor.call('disponibiliteCamion', Flottes.find().fetch()[0]._id))
+        .to.equal(false);
       done();
     });
     it('changerLocalisationCamion: localisation retourne la nouvelle' +
       ' localisation', done => {
-      Meteor.call('changerLocalisationCamion', Flottes.find().fetch()[0]._id, 'Marseille, FR');
-      expect(Meteor.call('localisationCamion', Flottes.find().fetch()[0]._id)).to.equal('Marseille, FR');
+      Meteor.call('changerLocalisationCamion', Flottes.find().fetch()[0]._id,
+        'Marseille, FR');
+      expect(Meteor.call('localisationCamion', Flottes.find().fetch()[0]._id))
+        .to.equal('Marseille, FR');
       done();
     });
     it('supprimerCamion: liste des camions doit etre vide', done => {

@@ -14,7 +14,6 @@ Template.dashboard.helpers({
   }
 });
 
-
 Template.dashboard.events({
   'click #create'() {
     Meteor.call('insererCamion');
