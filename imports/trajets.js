@@ -7,9 +7,6 @@ import {Meteor} from 'meteor/meteor';
 const Trajets = new Mongo.Collection('trajets');
 
 Meteor.methods({
-  afficherListeTrajets() {
-    return Trajets.find().fetch();
-  },
   insererTrajet(_id, depart, arrivee) {
     if (!this.userId) {
       throw new Meteor.Error('unauthorized');
@@ -22,19 +19,7 @@ Meteor.methods({
       dateDepart: Date.now(),
       annule: false
     });
-  } /*
-  dateDepart(trajet_id) {
-    return Trajets.findOne({trajet_id}).dateDepart;
-  },
-  departTrajet(trajet_id) {
-    return Trajets.findOne({trajet_id}).depart;
-  },
-  destinationTrajet(trajet_id) {
-    return Trajets.findOne({trajet_id}).destination;
-  },
-  annulerTrajet(trajet_id) {
-    Trajets.update({trajet_id}, {$set: {annule: true}});
-  } */
+  }
 });
 
 export default Trajets;
