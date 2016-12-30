@@ -1,5 +1,5 @@
 {
-  "name": "Gestion de camions autonomes",
+  "name": "hello",
   "private": true,
   "scripts": {
     "start": "meteor run"
@@ -14,7 +14,9 @@
     "mocha": "^3.2.0",
     "time": "^0.11.4"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "autoprefixer": "^6.3.1"
+  },
   "xo": {
     "esnext": true,
     "envs": [
@@ -25,6 +27,11 @@
       "max-len": ["error", 80, 2],
       "import/no-unresolved": ["error", { "ignore": ["^meteor/", "^/"] }],
       "import/no-extraneous-dependencies": [0, {"ignore": ["meteor"]}]
+    }
+  },
+  "postcss": {
+    "plugins": {
+      "autoprefixer": {"browsers": ["last 2 versions"]}
     }
   }
 }
