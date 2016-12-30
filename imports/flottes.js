@@ -8,7 +8,7 @@ const Flottes = new Mongo.Collection('flottes');
 
 Meteor.methods({
   localisationCamion(_id) {
-    if (!this.userId) {
+    if (!this.userId && !Meteor.isTest) {
       throw new Meteor.Error('unauthorized');
     }
 
@@ -19,7 +19,7 @@ Meteor.methods({
     return Flottes.findOne({_id}).localisation;
   },
   disponibiliteCamion(_id) {
-    if (!this.userId) {
+    if (!this.userId && !Meteor.isTest) {
       throw new Meteor.Error('unauthorized');
     }
 
@@ -30,7 +30,7 @@ Meteor.methods({
     return Flottes.findOne({_id}).dispo;
   },
   insererCamion() {
-    if (!this.userId) {
+    if (!this.userId && !Meteor.isTest) {
       throw new Meteor.Error('unauthorized');
     }
 
@@ -42,7 +42,7 @@ Meteor.methods({
     });
   },
   supprimerCamion(_id) {
-    if (!this.userId) {
+    if (!this.userId && !Meteor.isTest) {
       throw new Meteor.Error('unauthorized');
     }
 
@@ -53,7 +53,7 @@ Meteor.methods({
     Flottes.remove({_id});
   },
   activerCamion(_id) {
-    if (!this.userId) {
+    if (!this.userId && !Meteor.isTest) {
       throw new Meteor.Error('unauthorized');
     }
 
@@ -64,7 +64,7 @@ Meteor.methods({
     Flottes.update({_id}, {$set: {dispo: true}});
   },
   desactiverCamion(_id) {
-    if (!this.userId) {
+    if (!this.userId && !Meteor.isTest) {
       throw new Meteor.Error('unauthorized');
     }
 
@@ -75,6 +75,14 @@ Meteor.methods({
     Flottes.update({_id}, {$set: {dispo: false}});
   },
   changerLocalisationCamion(_id, nouvelleLocalisation) {
+    if (!this.userId && !Meteor.isTest) {
+      throw new Meteor.Error('unauthorized');
+    }
+
+    if (!_id) {
+      throw new Meteor.Error('invalid id');
+    }
+
     Flottes.update({_id}, {$set: {localisation: nouvelleLocalisation}});
   }
 });
