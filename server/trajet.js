@@ -2,9 +2,6 @@
  * Created by alexis_moreau on 28/11/2016.
  */
 import {Meteor} from 'meteor/meteor';
-import {resetDatabase} from 'meteor/xolvio:cleaner';
-
-resetDatabase(); // just for dev
 
 const distance = require('google-distance');
 const Future = require('fibers/future');
@@ -26,38 +23,38 @@ Meteor.methods({
     );
     return future.wait();
   },
-  trajet(id, depart, arrivee) {
-    console.log('Flotte ' + id + ' située à ' + depart +
-      '. Envoi à ' + arrivee);
-
+  trajet(_id, depart, arrivee) {
     const delai = Meteor.call('calculDureeTrajet', depart, arrivee);
 
     console.log('De ' + depart + ' à ' + arrivee + ' il y a ' + delai +
       ' secondes de trajet');
 
-    Meteor.call('changerLocalisationCamion', id, arrivee);
+    Meteor.call('changerLocalisationCamion', _id, arrivee);
 
-    depart = Meteor.call('localisationCamion', id);
-
-    console.log('Flotte ' + id + ' arrivée à ' + depart);
+    depart = Meteor.call('localisationCamion', _id);
   },
-  demandeTrajet(id, depart, arrivee) {
-    const localisation = Meteor.call('localisationCamion', id);
-    if (Meteor.call('disponibiliteCamion', id)) {
+  demandeTrajet(_id, depart, arrivee) {
+    const localisation = Meteor.call('localisationCamion', _id);
+    if (Meteor.call('disponibiliteCamion', _id)) {
       if (depart !== localisation) {
-        Meteor.call('desactiverCamion', id);
+        Meteor.call('desactiverCamion', _id);
 
-        Meteor.call('trajet', id, localisation, depart);
+        Meteor.call('insererTrajet', _id, localisation, depart);
+        Meteor.call('trajet', _id, localisation, depart);
 
-        Meteor.call('trajet', id, depart, arrivee);
+        Meteor.call('insererTrajet', _id, depart, arrivee);
+        Meteor.call('trajet', _id, depart, arrivee);
 
-        Meteor.call('activerCamion', id);
+        Meteor.call('activerCamion', _id);
       } else if (depart === localisation) {
-        Meteor.call('desactiverCamion', id);
+        Meteor.call('desactiverCamion', _id);
 
-        Meteor.call('trajet', id, depart, arrivee);
+        Meteor.call('insererTrajet', _id, depart, arrivee);
+        Meteor.call('trajet', _id, depart, arrivee);
 
-        Meteor.call('activerCamion', id);
+        Meteor.call('activerCamion', _id);
+      } else if (depart === arrivee) {
+        console.log('depart et arrivee identique');
       }
     } else {
       console.log('flotte non disponible');
@@ -66,20 +63,11 @@ Meteor.methods({
 });
 
 /*
- Flotte située à Paris mais trajet de Strasbourg à Marseille
+ const delai = 200;
+ let i;
+ let avancement;
+ for (i = 0; i < delai; i++) {
+ avancement = Math.round((i / delai) * 100);
+ console.log(avancement + '%');
+ }
  */
-
-let currentId = 1; // debut du compte des id camions
-
-const cametar = Object.create({}, { // creation camion avec id partant de 1
-  id: {value: currentId++}
-});
-
-Meteor.call('insererCamion', cametar); // inserer un camion dans la flotte
-
-console.log(Meteor.call('afficherListeCamions'));
-
-Meteor.call('demandeTrajet', 1, 'Brest, FR', 'Marseille, FR');
-Meteor.call('demandeTrajet', 1, 'Marseille, FR', 'Paris, FR');
-
-console.log(Meteor.call('afficherListeCamions'));

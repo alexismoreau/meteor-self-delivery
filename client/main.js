@@ -1,4 +1,4 @@
-import {Accounts} from 'meteor/meteor';
+import {Accounts} from 'meteor/accounts-base';
 // import './main.html';
 // in xo rules: "import/no-unassigned-import": [0, {"ignore": ["./main.html"]}],
 

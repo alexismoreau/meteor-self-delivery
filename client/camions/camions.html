@@ -1,0 +1,101 @@
+<template name="dashboard">
+    <ol class="dashboard">
+        {{> creerCamion}}
+        {{#each camions}}
+            {{> camion}} {{> demanderTrajet}}
+        {{else}}
+            {{> no_camions}}
+        {{/each}}
+    </ol>
+</template>
+
+<template name="camion">
+    <li class="camion {{selected}}">
+        <span class="localisation">Localisation: {{localisation}}</span>
+        {{#if dispo}}
+            <span class="dispo">Disponible</span>
+        {{else}}
+            <span class="dispo">Indisponible</span>
+        {{/if}}
+    </li>
+    <button id="select">Selectionner</button>
+    <button id="enable">Activer</button>
+    <button id="disable">Desactiver</button>
+    <button id="delete">Supprimer</button>
+</template>
+
+<template name="no_camions">
+    <li class="no-camions">
+        Pas de camion disponible
+    </li>
+</template>
+
+<template name="creerCamion">
+    <button id="create">Créer un Camion</button>
+</template>
+
+<template name="demanderTrajet">
+    <form>
+        <fieldset>
+            <legend>Départ</legend>
+            <ul>
+                <li>
+                    <label for="dep_1">
+                        <input type="radio" id="dep_1" name="Depart" value="Paris, FR" checked> Paris
+                    </label>
+                </li>
+                <li>
+                    <label for="dep_2">
+                        <input type="radio" id="dep_2" name="Depart" value="Marseille, FR"> Marseille
+                    </label>
+                </li>
+                <li>
+                    <label for="dep_3">
+                        <input type="radio" id="dep_3" name="Depart" value="Nantes, FR"> Nantes
+                    </label>
+                </li>
+                <li>
+                    <label for="dep_4">
+                        <input type="radio" id="dep_4" name="Depart" value="Strasbourg, FR"> Strasbourg
+                    </label>
+                </li>
+                <li>
+                    <label for="dep_5">
+                        <input type="radio" id="dep_5" name="Depart" value="Lyon, FR"> Lyon
+                    </label>
+                </li>
+            </ul>
+        </fieldset>
+        <fieldset>
+            <legend>Destination</legend>
+            <ul>
+                <li>
+                    <label for="arr_1">
+                        <input type="radio" id="arr_1" name="Destination" value="Paris, FR"> Paris
+                    </label>
+                </li>
+                <li>
+                    <label for="arr_2">
+                        <input type="radio" id="arr_2" name="Destination" value="Marseille, FR" checked> Marseille
+                    </label>
+                </li>
+                <li>
+                    <label for="arr_3">
+                        <input type="radio" id="arr_3" name="Destination" value="Nantes, FR"> Nantes
+                    </label>
+                </li>
+                <li>
+                    <label for="arr_4">
+                        <input type="radio" id="arr_4" name="Destination" value="Strasbourg, FR"> Strasbourg
+                    </label>
+                </li>
+                <li>
+                    <label for="arr_5">
+                        <input type="radio" id="arr_5" name="Destination" value="Lyon, FR"> Lyon
+                    </label>
+                </li>
+            </ul>
+        </fieldset>
+        <input type="submit" value="Demander trajet">
+    </form>
+</template>

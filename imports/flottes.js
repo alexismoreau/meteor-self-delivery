@@ -7,82 +7,75 @@ import {Meteor} from 'meteor/meteor';
 const Flottes = new Mongo.Collection('flottes');
 
 Meteor.methods({
-  afficherListeCamions() {
-    return Flottes.find().fetch();
-  },
-  localisationCamion(id) {
-    //  if (!this.userId) {                    ATTENTE AUTHENTIFICATION
-    //  throw new Meteor.Error('unauthorized');
-    //  }
+  localisationCamion(_id) {
+    if (!this.userId) {
+      throw new Meteor.Error('unauthorized');
+    }
 
-    if (!id) {
+    if (!_id) {
       throw new Meteor.Error('invalid id');
     }
 
-    return Flottes.findOne({id}).localisation;
+    return Flottes.findOne({_id}).localisation;
   },
-  disponibiliteCamion(id) {
-    //  if (!this.userId) {                    ATTENTE AUTHENTIFICATION
-    //  throw new Meteor.Error('unauthorized');
-    //  }
+  disponibiliteCamion(_id) {
+    if (!this.userId) {
+      throw new Meteor.Error('unauthorized');
+    }
 
-    if (!id) {
+    if (!_id) {
       throw new Meteor.Error('invalid id');
     }
 
-    return Flottes.findOne({id}).dispo;
+    return Flottes.findOne({_id}).dispo;
   },
-  insererCamion(camion) {
-    //  if(!this.userId) {                    ATTENTE AUTHENTIFICATION
-    //    console.log('ici');
-    //    throw new Meteor.Error('unauthorized');
-    //  }
-
-    const listeCamions = Flottes.find().fetch().push(camion);
+  insererCamion() {
+    if (!this.userId) {
+      throw new Meteor.Error('unauthorized');
+    }
 
     Flottes.insert({
-      id: listeCamions,
       localisation: 'Paris, FR', // Paris par default
       dispo: true, // dispo par defaut
       createdBy: this.userId, // proprietaire
       createdAt: Date.now() // date de creation
     });
   },
-  supprimerCamion(id) {
-    //  if (!this.userId) {                    ATTENTE AUTHENTIFICATION
-    //  throw new Meteor.Error('unauthorized');
-    //  }
+  supprimerCamion(_id) {
+    if (!this.userId) {
+      throw new Meteor.Error('unauthorized');
+    }
 
-    if (!id) {
+    if (!_id) {
       throw new Meteor.Error('invalid id');
     }
 
-    Flottes.remove({id});
+    Flottes.remove({_id});
   },
-  activerCamion(id) {
-    //  if (!this.userId) {                    ATTENTE AUTHENTIFICATION
-    //  throw new Meteor.Error('unauthorized');
-    //  }
+  activerCamion(_id) {
+    if (!this.userId) {
+      throw new Meteor.Error('unauthorized');
+    }
 
-    if (!id) {
+    if (!_id) {
       throw new Meteor.Error('invalid id');
     }
 
-    Flottes.update({id}, {$set: {dispo: true}});
+    Flottes.update({_id}, {$set: {dispo: true}});
   },
-  desactiverCamion(id) {
-    //  if (!this.userId) {                    ATTENTE AUTHENTIFICATION
-    //  throw new Meteor.Error('unauthorized');
-    //  }
+  desactiverCamion(_id) {
+    if (!this.userId) {
+      throw new Meteor.Error('unauthorized');
+    }
 
-    if (!id) {
+    if (!_id) {
       throw new Meteor.Error('invalid id');
     }
 
-    Flottes.update({id}, {$set: {dispo: false}});
+    Flottes.update({_id}, {$set: {dispo: false}});
   },
-  changerLocalisationCamion(id, nouvelleLocalisation) {
-    Flottes.update({id}, {$set: {localisation: nouvelleLocalisation}});
+  changerLocalisationCamion(_id, nouvelleLocalisation) {
+    Flottes.update({_id}, {$set: {localisation: nouvelleLocalisation}});
   }
 });
 

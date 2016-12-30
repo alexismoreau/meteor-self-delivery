@@ -9,4 +9,11 @@
             {{> loginButtons}}
         </div>
     </div>
+    <div>
+        {{#if currentUser}}
+            {{> dashboard}}
+        {{else}}
+            <p>Connectez-vous pour voir ce contenu</p>
+        {{/if}}
+    </div>
 </body>
