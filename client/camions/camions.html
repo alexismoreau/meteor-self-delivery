@@ -18,10 +18,12 @@
             <span class="dispo">Indisponible</span>
         {{/if}}
     </li>
-    <button id="select">Selectionner</button>
-    <button id="enable">Activer</button>
-    <button id="disable">Desactiver</button>
-    <button id="delete">Supprimer</button>
+    <div class="four ui buttons">
+        <button id="select" class="ui  red basic button">Selectionner</button>
+        <button id="enable" class="ui  blue basic button">Activer</button>
+        <button id="disable" class="ui  green basic button">Desactiver</button>
+        <button id="delete" class="ui orange basic button">Supprimer</button>
+    </div>
 </template>
 
 <template name="no_camions">
@@ -31,7 +33,9 @@
 </template>
 
 <template name="creerCamion">
-    <button id="create">Créer un Camion</button>
+    <div class="ui center aligned segment ">
+        <button id="create" class="ui purple basic button">Créer un Camion</button>
+    </div>
 </template>
 
 <template name="demanderTrajet">
@@ -96,6 +100,8 @@
                 </li>
             </ul>
         </fieldset>
-        <input type="submit" value="Demander trajet">
+        <div class="ui center aligned segment ">
+            <input type="submit" class="ui yellow basic button " value="Demander trajet">
+        </div>
     </form>
 </template>
