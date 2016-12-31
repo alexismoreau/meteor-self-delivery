@@ -18,12 +18,14 @@
             <span class="dispo">Indisponible</span>
         {{/if}}
     </li>
+    <br/>
     <div class="four ui buttons">
         <button id="select" class="ui  red basic button">Selectionner</button>
         <button id="enable" class="ui  blue basic button">Activer</button>
         <button id="disable" class="ui  green basic button">Desactiver</button>
         <button id="delete" class="ui orange basic button">Supprimer</button>
     </div>
+    <br/> <br/>
 </template>
 
 <template name="no_camions">
@@ -35,73 +37,81 @@
 <template name="creerCamion">
     <div class="ui center aligned segment ">
         <button id="create" class="ui purple basic button">Créer un Camion</button>
-    </div>
+    </div> <br/>
+    <h2 class="ui center aligned icon header">
+        <i class="circular shipping icon"></i>
+        Transport
+    </h2> <br/>
 </template>
+
+
 
 <template name="demanderTrajet">
     <form>
-        <fieldset>
-            <legend>Départ</legend>
-            <ul>
-                <li>
-                    <label for="dep_1">
-                        <input type="radio" id="dep_1" name="Depart" value="Paris, FR" checked> Paris
-                    </label>
-                </li>
-                <li>
-                    <label for="dep_2">
-                        <input type="radio" id="dep_2" name="Depart" value="Marseille, FR"> Marseille
-                    </label>
-                </li>
-                <li>
-                    <label for="dep_3">
-                        <input type="radio" id="dep_3" name="Depart" value="Nantes, FR"> Nantes
-                    </label>
-                </li>
-                <li>
-                    <label for="dep_4">
-                        <input type="radio" id="dep_4" name="Depart" value="Strasbourg, FR"> Strasbourg
-                    </label>
-                </li>
-                <li>
-                    <label for="dep_5">
-                        <input type="radio" id="dep_5" name="Depart" value="Lyon, FR"> Lyon
-                    </label>
-                </li>
-            </ul>
-        </fieldset>
-        <fieldset>
-            <legend>Destination</legend>
-            <ul>
-                <li>
-                    <label for="arr_1">
-                        <input type="radio" id="arr_1" name="Destination" value="Paris, FR"> Paris
-                    </label>
-                </li>
-                <li>
-                    <label for="arr_2">
-                        <input type="radio" id="arr_2" name="Destination" value="Marseille, FR" checked> Marseille
-                    </label>
-                </li>
-                <li>
-                    <label for="arr_3">
-                        <input type="radio" id="arr_3" name="Destination" value="Nantes, FR"> Nantes
-                    </label>
-                </li>
-                <li>
-                    <label for="arr_4">
-                        <input type="radio" id="arr_4" name="Destination" value="Strasbourg, FR"> Strasbourg
-                    </label>
-                </li>
-                <li>
-                    <label for="arr_5">
-                        <input type="radio" id="arr_5" name="Destination" value="Lyon, FR"> Lyon
-                    </label>
-                </li>
-            </ul>
-        </fieldset>
+        <div class="ui two column grid" align="center">
+                <div class="column">
+                        <legend style="font-weight:bold"> Départ :</legend> <br/>
+                    <li>
+                        <li>
+                            <label>
+                                <input type="checkbox" id="dep_1" name="Depart" value="Paris, FR" checked> Paris
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="checkbox" id="dep_2" name="Depart" value="Marseille, FR"> Marseille
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="checkbox" id="dep_3" name="Depart" value="Nantes, FR"> Nantes
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="checkbox" id="dep_4" name="Depart" value="Strasbourg, FR"> Strasbourg
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="checkbox" id="dep_5" name="Depart" value="Lyon, FR"> Lyon
+                            </label>
+                        </li>
+                    </li>
+                </div>
+                <div class="column">
+                    <legend style="font-weight:bold" >Destination :</legend> <br/>
+                    <ul>
+                        <li>
+                            <label for="arr_1">
+                                <input type="checkbox" id="arr_1" name="Destination" value="Paris, FR"> Paris
+                            </label>
+                        </li>
+                        <li>
+                            <label for="arr_2">
+                                <input type="checkbox" id="arr_2" name="Destination" value="Marseille, FR" checked> Marseille
+                            </label>
+                        </li>
+                        <li>
+                            <label for="arr_3">
+                                <input type="checkbox" id="arr_3" name="Destination" value="Nantes, FR"> Nantes
+                            </label>
+                        </li>
+                        <li>
+                            <label for="arr_4">
+                                <input type="checkbox" id="arr_4" name="Destination" value="Strasbourg, FR"> Strasbourg
+                            </label>
+                        </li>
+                        <li>
+                            <label for="arr_5">
+                                <input type="checkbox" id="arr_5" name="Destination" value="Lyon, FR"> Lyon
+                            </label>
+                        </li>
+                    </ul>
+                </div>
+        </div>
         <div class="ui center aligned segment ">
             <input type="submit" class="ui yellow basic button " value="Demander trajet">
         </div>
-    </form>
+    </form> <br/>
 </template>
