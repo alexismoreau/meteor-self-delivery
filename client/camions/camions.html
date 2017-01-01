@@ -44,70 +44,64 @@
     </h2> <br/>
 </template>
 
-
-
 <template name="demanderTrajet">
     <form>
         <div class="ui two column grid" align="center">
                 <div class="column">
                         <legend style="font-weight:bold"> Départ :</legend> <br/>
-                    <li>
-                        <li>
+                        <li class="ville">
                             <label>
-                                <input type="checkbox" id="dep_1" name="Depart" value="Paris, FR" checked> Paris
+                                <input type="radio" id="dep_1" name="Depart" value="Paris, FR" checked> Paris
                             </label>
                         </li>
-                        <li>
+                        <li class="ville">
                             <label>
-                                <input type="checkbox" id="dep_2" name="Depart" value="Marseille, FR"> Marseille
+                                <input type="radio" id="dep_2" name="Depart" value="Marseille, FR"> Marseille
                             </label>
                         </li>
-                        <li>
+                        <li class="ville">
                             <label>
-                                <input type="checkbox" id="dep_3" name="Depart" value="Nantes, FR"> Nantes
+                                <input type="radio" id="dep_3" name="Depart" value="Nantes, FR"> Nantes
                             </label>
                         </li>
-                        <li>
+                        <li class="ville">
                             <label>
-                                <input type="checkbox" id="dep_4" name="Depart" value="Strasbourg, FR"> Strasbourg
+                                <input type="radio" id="dep_4" name="Depart" value="Strasbourg, FR"> Strasbourg
                             </label>
                         </li>
-                        <li>
+                        <li class="ville">
                             <label>
-                                <input type="checkbox" id="dep_5" name="Depart" value="Lyon, FR"> Lyon
+                                <input type="radio" id="dep_5" name="Depart" value="Lyon, FR"> Lyon
                             </label>
                         </li>
-                    </li>
                 </div>
                 <div class="column">
                     <legend style="font-weight:bold" >Destination :</legend> <br/>
-                    <ul>
-                        <li>
+                        <li class="ville">
                             <label for="arr_1">
-                                <input type="checkbox" id="arr_1" name="Destination" value="Paris, FR"> Paris
+                                <input type="radio" id="arr_1" name="Destination" value="Paris, FR"> Paris
                             </label>
                         </li>
-                        <li>
+                        <li class="ville">
                             <label for="arr_2">
-                                <input type="checkbox" id="arr_2" name="Destination" value="Marseille, FR" checked> Marseille
+                                <input type="radio" id="arr_2" name="Destination" value="Marseille, FR" checked> Marseille
                             </label>
                         </li>
-                        <li>
+                        <li class="ville">
                             <label for="arr_3">
-                                <input type="checkbox" id="arr_3" name="Destination" value="Nantes, FR"> Nantes
+                                <input type="radio" id="arr_3" name="Destination" value="Nantes, FR"> Nantes
                             </label>
                         </li>
-                        <li>
+                        <li class="ville">
                             <label for="arr_4">
-                                <input type="checkbox" id="arr_4" name="Destination" value="Strasbourg, FR"> Strasbourg
+                                <input type="radio" id="arr_4" name="Destination" value="Strasbourg, FR"> Strasbourg
                             </label>
                         </li>
-                        <li>
+                        <li class="ville">
                             <label for="arr_5">
-                                <input type="checkbox" id="arr_5" name="Destination" value="Lyon, FR"> Lyon
+                                <input type="radio" id="arr_5" name="Destination" value="Lyon, FR"> Lyon
                             </label>
                         </li>
-                    </ul>
                 </div>
         </div>
         <div class="ui center aligned segment ">
