@@ -6,20 +6,6 @@ import {Template} from 'meteor/templating';
 import {Meteor} from 'meteor/meteor';
 import Flottes from '../../imports/flottes';
 
-Template.dashboard.helpers({
-  camions() {
-    // retourne liste des camions pour chaque utilisateur
-    const currentUserId = Meteor.userId();
-    return Flottes.find({createdBy: currentUserId});
-  }
-});
-
-Template.dashboard.events({
-  'click #create'() {
-    Meteor.call('insererCamion');
-  }
-});
-
 Template.camion.events({
   'click #select'() {
     // click on a truck to select it

@@ -1,14 +1,3 @@
-<template name="dashboard">
-    <ol class="dashboard">
-        {{> creerCamion}}
-        {{#each camions}}
-            {{> camion}} {{> demanderTrajet}}
-        {{else}}
-            {{> no_camions}}
-        {{/each}}
-    </ol>
-</template>
-
 <template name="camion">
     <li class="camion {{selected}}">
         <span class="localisation">Localisation: {{localisation}}</span>

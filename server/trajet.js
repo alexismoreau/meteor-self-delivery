@@ -29,6 +29,8 @@ Meteor.methods({
     console.log('De ' + depart + ' à ' + arrivee + ' il y a ' + delai +
       ' secondes de trajet');
 
+    Meteor.call('insererTrajet', _id, depart, arrivee, delai);
+
     Meteor.call('changerLocalisationCamion', _id, arrivee);
 
     depart = Meteor.call('localisationCamion', _id);
@@ -39,17 +41,14 @@ Meteor.methods({
       if (depart !== localisation) {
         Meteor.call('desactiverCamion', _id);
 
-        Meteor.call('insererTrajet', _id, localisation, depart);
         Meteor.call('trajet', _id, localisation, depart);
 
-        Meteor.call('insererTrajet', _id, depart, arrivee);
         Meteor.call('trajet', _id, depart, arrivee);
 
         Meteor.call('activerCamion', _id);
       } else if (depart === localisation) {
         Meteor.call('desactiverCamion', _id);
 
-        Meteor.call('insererTrajet', _id, depart, arrivee);
         Meteor.call('trajet', _id, depart, arrivee);
 
         Meteor.call('activerCamion', _id);

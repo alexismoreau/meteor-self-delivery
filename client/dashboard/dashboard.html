@@ -1,0 +1,17 @@
+<template name="dashboard">
+    <ol class="camions">
+        {{> creerCamion}}
+        {{#each camions}}
+            {{> camion}} {{> demanderTrajet}}
+        {{else}}
+            {{> no_camions}}
+        {{/each}}
+    </ol>
+    <ol class="trajets">
+        {{#each trajets}}
+            {{> trajet}}
+        {{else}}
+            {{> no_trajets}}
+        {{/each}}
+    </ol>
+</template>
