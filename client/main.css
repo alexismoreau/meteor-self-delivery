@@ -8,3 +8,9 @@ body > div:nth-child(71) > ol {
 .ville {
     list-style: none;
 }
+.trajets {
+    list-style: none;
+}
+.no-camions {
+    list-style: none;
+}
