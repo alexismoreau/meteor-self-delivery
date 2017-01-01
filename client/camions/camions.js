@@ -28,10 +28,16 @@ Template.demanderTrajet.events({
     event.preventDefault();
     const origine = event.target.Depart.value;
     const destination = event.target.Destination.value;
-    if (origine === destination) {
-      console.log('depart et destination identiques');
-    } else {
-      Meteor.call('demandeTrajet', this._id, origine, destination);
-    }
+    Meteor.call('disponibiliteCamion', this._id, (err, res) => {
+      if (res === true) {
+        if (origine === destination) {
+          console.log('depart et destination identiques');
+        } else {
+          Meteor.call('demandeTrajet', this._id, origine, destination);
+        }
+      } else {
+        console.log('flotte non disponible');
+      }
+    });
   }
 });

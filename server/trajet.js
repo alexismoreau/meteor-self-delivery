@@ -23,37 +23,37 @@ Meteor.methods({
     );
     return future.wait();
   },
-  trajet(_id, depart, arrivee) {
-    const delai = Meteor.call('calculDureeTrajet', depart, arrivee);
-
-    console.log('De ' + depart + ' à ' + arrivee + ' il y a ' + delai +
-      ' secondes de trajet');
-
-    Meteor.call('insererTrajet', _id, depart, arrivee, delai);
-
-    Meteor.call('changerLocalisationCamion', _id, arrivee);
-
-    depart = Meteor.call('localisationCamion', _id);
+  trajet(_id, depart, destinationIntermediaire, destinationFinale) {
+    if (depart === destinationIntermediaire) {
+      const delai = Meteor.call('calculDureeTrajet', depart, destinationFinale);
+      console.log('De ' + depart + ' à ' + destinationFinale + ' il y a ' +
+        delai + ' secondes de trajet.');
+      Meteor.call('insererTrajet', _id, depart, "", delai, destinationFinale);
+    }
+    else {
+      const delai1 = Meteor.call('calculDureeTrajet', depart,
+        destinationIntermediaire);
+      const delai2 = Meteor.call('calculDureeTrajet',
+        destinationIntermediaire, destinationFinale);
+      const delaiTotal = (delai1 + delai2);
+      console.log('De ' + depart + ' à ' + destinationIntermediaire +
+        ' il y a ' + delai1 +
+        ' secondes de trajet. Destination finale: ' + destinationFinale +
+        ', il y aura ' + delai2 + ' de temps de trajet supplémentaire. ');
+      console.log('Temps total: ' + delaiTotal + ' secondes.');
+      Meteor.call('insererTrajet', _id, depart, destinationIntermediaire,
+        delaiTotal, destinationFinale);
+    }
   },
   demandeTrajet(_id, depart, arrivee) {
     const localisation = Meteor.call('localisationCamion', _id);
     if (Meteor.call('disponibiliteCamion', _id)) {
-      if (depart !== localisation) {
+      if (depart === arrivee) {
+        console.log('depart et arrivee identiques');
+      } else {
         Meteor.call('desactiverCamion', _id);
 
-        Meteor.call('trajet', _id, localisation, depart);
-
-        Meteor.call('trajet', _id, depart, arrivee);
-
-        Meteor.call('activerCamion', _id);
-      } else if (depart === localisation) {
-        Meteor.call('desactiverCamion', _id);
-
-        Meteor.call('trajet', _id, depart, arrivee);
-
-        Meteor.call('activerCamion', _id);
-      } else if (depart === arrivee) {
-        console.log('depart et arrivee identique');
+        Meteor.call('trajet', _id, localisation, depart, arrivee);
       }
     } else {
       console.log('flotte non disponible');

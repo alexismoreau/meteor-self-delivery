@@ -12,25 +12,41 @@ Template.trajet.events({
       if (err) console.log(err);
       else if (res < Date.now()) {
         console.log('trajet terminé');
+        const arrivee = Meteor.call('destinationFinale', this._id);
+        const idCamion = Meteor.call('idCamion', this._id);
+        Meteor.call('changerLocalisationCamion', idCamion, arrivee);
+        Meteor.call('activerCamion', idCamion);
         Meteor.call('terminerTrajet', this._id);
       }
       else {
-        console.log('il reste ' + (res - Date.now())/1000  + ' secondes de trajet');
+        console.log('il reste ' + (res - Date.now()) / 1000 + ' secondes de trajet');
       }
     });
   }
 });
-/*
-const minutes = 5, the_interval = minutes * 60 * 1000;
-setInterval(function() {
-  console.log("I am doing my 5 minutes check");
-  Meteor.call('dateFin', this._id, (err, res) => {
-    if (err) console.log(err);
-    else if (res < Date.now()) {
-      console.log('trajet terminé');
-      Meteor.call('terminerTrajet', this._id);
-    }
-  });
-  // do your stuff here
-}, the_interval);
-*/
+
+const minutes = 5, interval = minutes * 60 * 1000;
+Meteor.setInterval(() => {
+  console.log("Verification toutes les 5 minutes");
+  let i;
+  for (i = 0; i < Trajets.find().fetch().length; i++) {
+    const idTrajet = Trajets.find().fetch()[i]._id;
+    Meteor.call('dateFin', idTrajet, (err, dateFin) => {
+      if (err) console.log(err);
+      else if (dateFin < Date.now()) {
+        console.log('trajet terminé');
+        Meteor.call('destinationFinale', idTrajet, (err, arrivee) => {
+          console.log(arrivee);
+          Meteor.call('idCamion', idTrajet, (err, idCamion) => {
+            console.log(idCamion);
+            Meteor.call('changerLocalisationCamion', idCamion, arrivee);
+            Meteor.call('activerCamion', idCamion);
+            Meteor.call('terminerTrajet', idTrajet);
+          });
+        });
+      } else {
+        console.log('verif: il reste ' + (dateFin - Date.now()) / 1000 + ' secondes de trajet');
+      }
+    });
+  }
+}, interval);
