@@ -31,5 +31,6 @@ meteor test --driver-package=practicalmeteor:mocha
 
 # Enjoy
 browse to http://localhost:3000
+
 Create an account and start your first autonomous truck company !
 
