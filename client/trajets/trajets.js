@@ -18,8 +18,15 @@ Template.trajet.events({
         Meteor.call('activerCamion', idCamion);
         Meteor.call('terminerTrajet', this._id);
       } else {
-        document.getElementById("reponse" ).innerHTML = ('il reste ' + ((dateFin - Date.now()) / 1000) +
-          ' secondes de trajet');
+        ms = dateFin - Date.now();
+        s = ms / 1000;
+        min = s / 60;
+        min2 = min% 60;
+        sec = s % 60;
+        h = min / 60;
+        document.getElementById("reponse" ).innerHTML = ('il reste ' + Math.floor(h)
+        + ' heure(s) ' + Math.floor(min2) + ' minute(s) ' + Math.floor(sec)  +
+        ' seconde(s) de trajet');
       }
     });
   }
@@ -50,8 +57,15 @@ Meteor.setInterval(() => {
           });
         });
       } else {
-        document.getElementById("reponse" ).innerHTML = ('il reste ' +
-        ((dateFin - Date.now()) / 1000) + ' secondes de trajet');
+        ms = dateFin - Date.now();
+        s = ms / 1000;
+        min = s / 60;
+        min2 = min% 60;
+        sec = s % 60;
+        h = min / 60;
+        document.getElementById("reponse" ).innerHTML = ('vérif : il reste ' + Math.floor(h)
+        + ' heure(s) ' + Math.floor(min2) + ' minute(s) ' + Math.floor(sec)  +
+        ' seconde(s) de trajet');
       }
     });
   }
