@@ -1,20 +1,15 @@
 <template name="camion">
-    <li class="camion {{selected}}">
-        <span class="localisation">Localisation: {{localisation}}</span>
+    <li class="camion  ui segment {{selected}}">
+        <span class="idCamion">id Camion : {{_id}}</span> <br>
+        <span class="localisation">Localisation: {{localisation}}</span><br>
         {{#if dispo}}
             <span class="dispo">Disponible</span>
         {{else}}
             <span class="dispo">Indisponible</span>
         {{/if}}
     </li>
-    <br/>
-    <div class="four ui buttons">
-        <button id="select" class="ui  red basic button">Selectionner</button>
-        <button id="enable" class="ui  blue basic button">Activer</button>
-        <button id="disable" class="ui  green basic button">Desactiver</button>
-        <button id="delete" class="ui orange basic button">Supprimer</button>
-    </div>
-    <br/> <br/>
+    <button id="delete" class="ui orange basic button">Supprimer Camion</button>
+
 </template>
 
 <template name="no_camions">
@@ -27,10 +22,8 @@
     <h2 class="ui center aligned icon header">
         <i class="circular shipping icon"></i>
         Transport
-    </h2> <br/>
-    <div class="ui center aligned segment ">
-        <button id="create" class="ui purple basic button">Créer un Camion</button>
-    </div>
+    </h2>
+    <button id="create" class="ui purple basic button">Créer un Camion</button>
 </template>
 
 <template name="demanderTrajet">
@@ -93,8 +86,6 @@
                         </li>
                 </div>
         </div>
-        <div class="ui center aligned segment ">
-            <input type="submit" class="ui yellow basic button " value="Demander trajet">
-        </div>
-    </form> <br/>
+        <input id="demandetrajet" type="submit" class="ui yellow basic button " value="Demander trajet">
+    </form>
 </template>

@@ -1,8 +1,11 @@
 <template name="trajet">
+    <h2 class="ui center aligned icon header">
+        <i class="circular train icon" id="trajet_icon"></i>
+    </h2>
     <li class="trajet {{selected}}">
-        <button id="avancement">Avancement</button> <br>
         <span class="id_flotte">Camion: {{idFlotte}}</span> <br>
-        <span class="route">{{origine}} {{destinationIntermediaire}} {{destinationFinale}}</span> <br>
+        <span class="route">{{origine}} {{destinationIntermediaire}} {{destinationFinale}}</span>
+        <br>
         <span class="dateDepart">Date de Départ: {{dateDepart}}</span> <br>
         <span class="dateFin">Date de Fin: {{dateFin}}</span> <br>
         {{#if termine}}
@@ -11,6 +14,10 @@
             <span class="dispo">Trajet en cours</span>
         {{/if}}
     </li>
+    <button id="avancement" class="ui purple basic button">Avancement
+        Trajet
+    </button>
+    <div id="reponse"></div>
 </template>
 
 <template name="no_trajets">

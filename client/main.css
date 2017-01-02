@@ -7,10 +7,38 @@ body > div:nth-child(71) > ol {
 }
 .ville {
     list-style: none;
+    display: flex;
+    padding-left: 45%;
 }
 .trajets {
     list-style: none;
 }
 .no-camions {
     list-style: none;
+}
+#reponse {
+    width: 50%;
+    float: right;
+    text-align: center;
+    padding-top: 1em;
+}
+.trajets > li {
+    width: 50%;
+    float: left;
+}
+#create, #delete, #demandetrajet, #avancement {
+    margin: auto;
+    display: block;
+}
+.myNavbar > div {
+    text-align: center;
+    font-size: large;
+}
+#trajet_icon {
+    display: none;
+}
+#textelogout {
+    font-size: large;
+    text-align: center;
+    padding-top: 2em;
 }

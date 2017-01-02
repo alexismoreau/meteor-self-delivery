@@ -26,7 +26,8 @@
     "rules": {
       "max-len": ["error", 80, 2],
       "import/no-unresolved": ["error", { "ignore": ["^meteor/", "^/"] }],
-      "import/no-extraneous-dependencies": [0, {"ignore": ["meteor"]}]
+      "import/no-extraneous-dependencies": [0, {"ignore": ["meteor"]}],
+      "max-params": ["error", 5]
     }
   },
   "postcss": {
