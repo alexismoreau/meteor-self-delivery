@@ -8,7 +8,7 @@ import Flottes from '../imports/flottes';
 const DDPCommon = Package['ddp-common'].DDPCommon;
 
 if (Meteor.isServer) {
-  describe('Fonctions relatives au Camions (modele)', () => {
+  describe('Fonctions relatives aux Camions', () => {
     resetDatabase();
 
     const invocation = new DDPCommon.MethodInvocation({

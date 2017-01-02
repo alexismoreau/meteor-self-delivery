@@ -78,6 +78,17 @@ Meteor.methods({
     }
 
     Trajets.update({_id}, {$set: {termine: true}});
+  },
+  trajetTermine(_id) {
+    if (!this.userId && !Meteor.isTest) {
+      throw new Meteor.Error('unauthorized');
+    }
+
+    if (!_id) {
+      throw new Meteor.Error('invalid id');
+    }
+
+    return Trajets.findOne({_id}).termine;
   }
 });
 
