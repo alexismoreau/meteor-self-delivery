@@ -17,10 +17,9 @@ body > div:nth-child(71) > ol {
     list-style: none;
 }
 #reponse {
-    width: 50%;
-    float: right;
     text-align: center;
     padding-top: 1em;
+    color: red;
 }
 .trajets > li {
     width: 50%;

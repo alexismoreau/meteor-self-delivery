@@ -26,7 +26,8 @@ if (Meteor.isServer) {
     it('insererTrajet: liste des trajets ne doit pas ' +
       'être nulle', done => {
       DDP._CurrentInvocation.withValue(invocation, () => {
-        Meteor.call('insererTrajet', '8Fd82Zw9pyMsE97yv', 'Paris, FR', 'Marseille, FR', 25000, 'Nantes, FR');
+        Meteor.call('insererTrajet', '8Fd82Zw9pyMsE97yv', 'Paris, FR',
+          'Marseille, FR', 25000, 'Nantes, FR');
       });
       expect(Trajets.find().fetch().length).to.not.equal(0);
       done();
@@ -37,8 +38,8 @@ if (Meteor.isServer) {
       done();
     });
     it('destinationIntermediaire: doit retourner une string', done => {
-      expect(Meteor.call('destinationIntermediaire', Trajets.find().fetch()[0]._id))
-        .to.be.a('string');
+      expect(Meteor.call('destinationIntermediaire',
+        Trajets.find().fetch()[0]._id)).to.be.a('string');
       done();
     });
     it('destinationFinale: doit retourner une string', done => {

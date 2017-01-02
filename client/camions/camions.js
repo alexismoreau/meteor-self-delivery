@@ -1,8 +1,6 @@
 /**
  * Created by alexis_moreau on 29/12/2016.
- */
-import {Session} from 'meteor/session';
-import {Template} from 'meteor/templating';
+ */import {Template} from 'meteor/templating';
 import {Meteor} from 'meteor/meteor';
 
 Template.camion.events({
@@ -34,7 +32,7 @@ Template.demanderTrajet.events({
           console.log('depart et destination identiques');
         } else {
           Meteor.call('demandeTrajet', this._id, origine, destination);
-          Meteor.call('changerLocalisationCamion', this._id, "Trajet en cours");
+          Meteor.call('changerLocalisationCamion', this._id, 'Trajet en cours');
         }
       } else {
         console.log('flotte non disponible');
