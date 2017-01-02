@@ -28,9 +28,8 @@ Meteor.methods({
       const delai = Meteor.call('calculDureeTrajet', depart, destinationFinale);
       console.log('De ' + depart + ' à ' + destinationFinale + ' il y a ' +
         delai + ' secondes de trajet.');
-      Meteor.call('insererTrajet', _id, depart, "", delai, destinationFinale);
-    }
-    else {
+      Meteor.call('insererTrajet', _id, depart, '', delai, destinationFinale);
+    } else {
       const delai1 = Meteor.call('calculDureeTrajet', depart,
         destinationIntermediaire);
       const delai2 = Meteor.call('calculDureeTrajet',
@@ -60,13 +59,3 @@ Meteor.methods({
     }
   }
 });
-
-/*
- const delai = 200;
- let i;
- let avancement;
- for (i = 0; i < delai; i++) {
- avancement = Math.round((i / delai) * 100);
- console.log(avancement + '%');
- }
- */
