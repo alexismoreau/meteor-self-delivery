@@ -20,7 +20,8 @@
   "xo": {
     "esnext": true,
     "envs": [
-      "meteor"
+      "meteor",
+      "browser"
     ],
     "space": 2,
     "rules": {

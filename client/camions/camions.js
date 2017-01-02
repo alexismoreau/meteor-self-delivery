@@ -1,6 +1,7 @@
 /**
  * Created by alexis_moreau on 29/12/2016.
- */import {Template} from 'meteor/templating';
+ */
+import {Template} from 'meteor/templating';
 import {Meteor} from 'meteor/meteor';
 
 Template.camion.events({
