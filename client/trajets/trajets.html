@@ -2,21 +2,28 @@
     <h2 class="ui center aligned icon header">
         <i class="circular train icon" id="trajet_icon"></i>
     </h2>
-    <li class="trajet {{selected}}">
-        <span class="id_flotte">Camion: {{idFlotte}}</span> <br>
-        <span class="route">{{origine}} {{destinationIntermediaire}} {{destinationFinale}}</span>
-        <br>
-        <span class="dateDepart">Date de Départ: {{dateDepart}}</span> <br>
-        <span class="dateFin">Date de Fin: {{dateFin}}</span> <br>
-        {{#if termine}}
-            <span class="dispo">Trajet terminé</span>
-        {{else}}
-            <span class="dispo">Trajet en cours</span>
-        {{/if}}
-    </li>
-    <button id="avancement" class="ui purple basic button">Avancement
-        Trajet
-    </button>
+    <div class="ui segment">
+        <li class="trajet">
+            <span class="flotte-value"
+                  id="id_flotte">Camion: {{idFlotte}}</span>
+            <span class="flotte-value"
+                  idid="route">{{origine}} -> {{destinationIntermediaire}} -> {{destinationFinale}}</span>
+            <span class="flotte-value"
+                  id="dateDepart">Date de Départ: {{dateDepart}}</span>
+            <span class="flotte-value"
+                  id="dateFin">Date de Fin: {{dateFin}}</span>
+        </li> <br>
+        <button id="avancement" class="ui purple basic button">Avancement
+            Trajet
+        </button>
+        <li class="trajet">
+            {{#if termine}}
+                <span id="dispo">Trajet terminé</span> <br>
+            {{else}}
+                <span id="dispo">Trajet en cours</span>
+            {{/if}}
+        </li>
+    </div>
 </template>
 
 <template name="no_trajets">

@@ -29,9 +29,21 @@
     width: 50%;
     float: left;
 }
-#create, #delete, #demandetrajet, #avancement {
-    margin: auto;
+.flotte-value {
+    width: 25%;
     display: block;
+    float: left;
+    text-align: center;
+}
+
+#dispo {
+    display: block;
+    text-align: center;
+}
+
+#create, #delete, #demandetrajet, #avancement {
+    display: block;
+    margin: 1em auto;
 }
 .myNavbar > div {
     text-align: center;

@@ -33,27 +33,27 @@ Meteor.methods({
     } else {
       console.log('il y a une étape intermediaire au trajet: ' +
         destinationIntermediaire);
+
       const delai1 = Meteor.call('calculDureeTrajet', depart,
         destinationIntermediaire);
       console.log('delai de: ' + depart + ' à ' + destinationIntermediaire +
-        ': ' + delai1);
+        ': ' + delai1 + ' secondes');
+
       const delai2 = Meteor.call('calculDureeTrajet',
         destinationIntermediaire, destinationFinale);
       console.log('delai de: ' + destinationIntermediaire + ' à ' +
-        destinationFinale + ': ' + delai1);
+        destinationFinale + ': ' + delai2 + ' secondes');
+
       const delaiTotal = (delai1 + delai2);
-      console.log('De ' + depart + ' à ' + destinationIntermediaire +
-        ' il y a ' + delai1 +
-        ' secondes de trajet. Destination finale: ' + destinationFinale +
-        ', il y aura ' + delai2 + ' de temps de trajet supplémentaire. ');
       console.log('Temps total: ' + delaiTotal + ' secondes.');
+
       Meteor.call('insererTrajet', _id, depart, destinationIntermediaire,
         delaiTotal, destinationFinale);
     }
   },
   demandeTrajet(_id, depart, arrivee) {
     const localisation = Meteor.call('localisationCamion', _id);
-    console.log('localisation initiale ' + localisation);
+    console.log('localisation initiale : ' + localisation);
     if (Meteor.call('disponibiliteCamion', _id)) {
       if (depart === arrivee) {
         console.log('depart et arrivee identiques');
