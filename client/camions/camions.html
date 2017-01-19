@@ -1,11 +1,11 @@
 <template name="camion">
     <li class="camion  ui segment {{selected}}">
-        <span class="idCamion">id Camion : {{_id}}</span> <br>
-        <span class="localisation">Localisation: {{localisation}}</span><br>
+        <span class="idCamion">id Camion : {{_id}}</span>
+        <span class="localisation">Localisation: {{localisation}}</span>
         {{#if dispo}}
-            <span class="dispo">Disponible</span>
+            <span class="dispo">Disponible</span> <br>
         {{else}}
-            <span class="dispo">Indisponible</span>
+            <span class="dispo">Indisponible</span> <br>
         {{/if}}
     </li>
     <button id="delete" class="ui orange basic button">Supprimer Camion</button>
@@ -24,6 +24,12 @@
         Transport
     </h2>
     <button id="create" class="ui purple basic button">Créer un Camion</button>
+    <form id="bulk-create">
+        <div class="ui input">
+            <input type="text" name="text"
+                   placeholder="Ajouer plusieurs camions" />
+        </div>
+    </form>
 </template>
 
 <template name="demanderTrajet">

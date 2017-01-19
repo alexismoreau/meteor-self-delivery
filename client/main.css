@@ -1,9 +1,13 @@
 /* CSS declarations go here */
-body > div:nth-child(71) > ol {
+.trajets {
     padding: 1em;
+    border-top: 1px solid black;
 }
 .camion {
     list-style: none;
+}
+.camions {
+    padding: 10px;
 }
 .ville {
     list-style: none;
@@ -40,4 +44,17 @@ body > div:nth-child(71) > ol {
     font-size: large;
     text-align: center;
     padding-top: 2em;
+}
+
+#bulk-create > div {
+    display: block;
+    text-align: center;
+    padding-top: 1em;
+}
+
+.dispo, .localisation, .idCamion {
+    width: 33.33333333%;
+    display: block;
+    float: left;
+    text-align: center;
 }
