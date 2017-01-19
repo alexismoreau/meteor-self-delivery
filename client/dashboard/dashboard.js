@@ -25,7 +25,9 @@ Template.dashboard.events({
     // Get value from form element
     const valeur = event.target.text.value;
 
-    if (valeur < 0) return false;
+    if (valeur < 0) {
+      return false;
+    }
 
     let i;
     for (i = 0; i < valeur; i++) {
