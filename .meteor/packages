@@ -22,3 +22,4 @@ meteorhacks:async
 accounts-ui
 accounts-password
 semantic:ui-css@=2.1.2
+semantic:ui-dropdown

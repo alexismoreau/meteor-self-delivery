@@ -1,0 +1,14 @@
+<template name="supprimerCamions">
+    <form>
+        <label id="label-bulk-delete">Selectionnez les camions à supprimer</label>
+        <select id="idCamionsSelectionnes" multiple="" class="ui fluid dropdown">
+            <option value="">idCamion</option>
+            {{#each cam}}
+                <option value={{_id}}>{{_id}}</option>
+            {{/each}}
+        </select>
+        <button id="bulk-delete" value="bulk-delete"
+                class="ui blue basic button">Supprimer selectionnés
+        </button>
+    </form>
+</template>

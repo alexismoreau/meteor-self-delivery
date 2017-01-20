@@ -1,5 +1,6 @@
 <template name="dashboard">
     <ol class="camions">
+        {{> supprimerCamions}}
         {{> creerCamion}}
         {{#each camions}}
             {{> camion}} {{> demanderTrajet}}
@@ -7,7 +8,7 @@
             {{> no_camions}}
         {{/each}}
     </ol>
-    <div id="reponse"></div>
+    <div id="reponse">Réponse</div>
     <ol class="trajets">
         {{#each trajets}}
             {{> trajet}}

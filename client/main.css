@@ -3,32 +3,44 @@
     padding: 1em;
     border-top: 1px solid black;
 }
+
 .camion {
     list-style: none;
 }
+
 .camions {
     padding: 10px;
 }
+
 .ville {
     list-style: none;
     display: flex;
     padding-left: 45%;
 }
+
 .trajets {
     list-style: none;
 }
+
 .no-camions {
     list-style: none;
 }
+
 #reponse {
     text-align: center;
-    padding-top: 1em;
-    color: red;
+    padding: 1em;
+    width: 30%;
+    display: block;
+    margin: auto;
+    background: red;
+    color: white;
 }
+
 .trajets > li {
     width: 50%;
     float: left;
 }
+
 .flotte-value {
     width: 25%;
     display: block;
@@ -41,17 +53,20 @@
     text-align: center;
 }
 
-#create, #delete, #demandetrajet, #avancement {
+#create, #delete, #demandetrajet, #avancement, #bulk-delete {
     display: block;
     margin: 1em auto;
 }
+
 .myNavbar > div {
     text-align: center;
     font-size: large;
 }
+
 #trajet_icon {
     display: none;
 }
+
 #textelogout {
     font-size: large;
     text-align: center;
@@ -69,4 +84,15 @@
     display: block;
     float: left;
     text-align: center;
+}
+
+.ui.fluid.dropdown {
+    width: 50%;
+    margin: auto;
+}
+
+#label-bulk-delete {
+    display: block;
+    text-align: center;
+    padding-top: 1em;
 }
